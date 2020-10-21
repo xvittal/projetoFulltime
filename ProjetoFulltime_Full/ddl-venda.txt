@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[Venda] (
+    [idcompra]  INT           NOT NULL,
+    [nome_do_cliente] VARCHAR(150) NOT NULL,
+    [data_venda] DATE NOT NULL,
+    [iddetalhe_da_venda] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([idcompra] ASC)
+    
+    //FAZER A FOREYG KEY
+);

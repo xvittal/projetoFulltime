@@ -1,0 +1,6 @@
+CREATE TABLE [dbo].[Itens] (
+    [idopcao_de_itens]  INT (1,1)           NOT NULL,
+    [descricao_do_item] VARCHAR (150) NOT NULL,
+    [valor_unitario]    FLOAT (53)    NOT NULL,
+    PRIMARY KEY CLUSTERED ([idopcao_de_itens] ASC)
+);

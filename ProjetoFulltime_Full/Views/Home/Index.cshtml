@@ -1,0 +1,160 @@
+﻿@model IEnumerable<ProjetoFulltime_Full.Models.Produto>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link href="https://code.jquery.com/jquery-3.4.1.js"> -->
+    <link rel="stylesheet" href="~/Content/Css/style.css">
+    <title>Projeto-FrontEnd</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark mb-3">
+            <a class="navbar-brand" href="#"><h1>Vendas</h1></a>
+        </nav>
+    </header>
+    <main>
+        <!-- primeira view -->
+        <div class="container ">
+            <div class="d-flex justify-content-end adiciona">
+                <button class="btn btn-success  btn-lg p-2 align-baseline borda" id="adiciona">
+                    Adicionar Vendas
+                </button>
+            </div>
+            <section class="limite center" id="primeiro">
+                <table class="table table-striped table-responsive-sm" id="tabela-cadastros">
+                    <thead class="thead-dark">
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Data Venda</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Excluir</th>
+                    </thead>
+                    <tbody id="corpo-tabela">
+                    </tbody>
+
+                </table>
+            </section>
+
+        </div>
+
+        <!-- segunda view -->
+        <div class="container ">
+            <section class="esconde" id="segundo">
+                <div class="esconde" id="mensagemCampoVazio">
+                    <p class="text-danger"><strong>Os campos de Nome e Data devem estar devidamente preenchidos!</strong></p>
+                </div>
+                <div class="d-flex justify-content-between bd-highlight container-sm p-0 m-0 flex-wrap">
+                    <div class="d-flex justify-content-between flex-fill bd-highlight">
+                        <form id="nomeData">
+                            <label for="nomeCliente" class="ml-2" required>Nome do Cliente</label>
+                            <input type="text" name="nomeCliente" class="mr-2">
+                            <label for="dataVenda" class="ml-2" required>Data da Venda</label>
+                            <input type="date" name="dataVenda" class="mr-2">
+                        </form>
+                    </div>
+                    <div class="d-flex justify-content-between flex-fill bd-highlight">
+                        <button class="btn btn-success  btn-lg btn-block  p-0 m-0" name="adiciona" data-toggle="modal" data-target=".bd-example-modal-sm" id="adicionaProduto">
+                            Adicionar produto
+                        </button>
+                        <div>
+                            <!-- seção modal -->
+                            <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog  modal-dialog-centered modal-sm">
+                                    <div class="modal-content ">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Adicionar Produto</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="produto-descricao">
+                                                <div class="form-group">
+                                                    <label for="item" class="col-form-label" required>Descrição do Item</label>
+                                                    <select class="form-control" name="item" id="produtoNome" required>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <option value="@item.Id" selected="@item.Id.Equals(ViewBag.Produtos.Id)">
+                                                                @item.Descricao_Produto
+                                                            </option>
+                                                        }
+                                                    </select>
+                                                    
+                                                    @*<input type="" class="form-control" name="item" id="produtoNome" required>*@
+                                                    <p class="text-danger esconde" id="campo-vazio-item">campo vazio!</p>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="quantidadeProduto" class="col-form-label" required>Quantidade</label>
+                                                    <input type="number" class="form-control" name="quantidadeProduto" id="produtoQuantidade" required>
+                                                    <p class="text-danger esconde" id="campo-vazio-quantidade">campo vazio!</p>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="valorProduto" class="col-form-label" required>Valor</label>
+                                                    <input type="number" class="form-control" name="valorProduto" id="produtoValor" required>
+                                                    <p class="text-danger esconde" id="campo-vazio-valor">campo vazio!</p>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer d-flex justify-content-between flex-fill bd-highlight">
+                                            <button type="button" class="btn btn-secondary btn-lg btn-block" data-dismiss="modal" id="modalFechar">Fechar</button>
+                                            <button type="submit" class="btn btn-success btn-lg btn-block" id="modalEnviar">Enviar</button>
+                                            <button type="submit" class="btn alerta esconde btn-lg btn-block" id="modalSalvar">Salvar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-2 esconde" id="mensagemTabelaVazia">
+                    <p class="text-danger"><strong>Adicione pelo menos um item na lista!</strong> </p>
+                </div>
+                <section class="limite center">
+                    <table class="table table-striped table-responsive-sm" id="tabela-produtos">
+                        <thead class="thead-dark">
+                        <th scope="col ">Descrição Item</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Valor Total</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Excluir</th>
+                        </thead>
+                        <tbody id="tabela-produto-corpo">
+                        </tbody>
+                    </table>
+                </section>
+                <div class="d-flex justify-content-between bd-highlight container-sm p-0 m-0">
+                    <div class="d-flex justify-content-between flex-fill bd-highlight">
+                        <button type="button" class="btn btn-secondary  btn-lg btn-block p-1  m-1 borda" id="cancelar">
+                            Cancelar
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-between flex-fill bd-highlight">
+                        <button type="button" class="btn btn-success  btn-lg btn-block  p-1 m-1 borda" id="botaoEnviar">
+                            Enviar
+                        </button>
+                        <button type="button" class="btn alerta  btn-lg btn-block  p-1 m-1 borda esconde" id="botaoSalvar">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <!-- Carlos Adauto -->
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="~/Script/index.js"></script>
+</body>
+</html>

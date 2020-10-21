@@ -1,0 +1,38 @@
+body{
+    background-color: rgb(212, 212, 212);
+}
+.limite{
+    height: 370px;
+    margin: 10px auto; 
+    overflow-y: auto;
+    float: initial;
+    position: relative;
+    background-color: whitesmoke;    
+}
+.center{
+    text-align: center;
+}
+.borda{
+    border-radius: 15px; 
+}
+.esconde{
+    display: none;
+}
+.delete{
+    cursor: pointer;
+}
+.editar{
+    cursor: pointer;
+}
+.alerta{
+    background-color: rgb(250, 163, 32);
+    font-weight: bold;
+    color: whitesmoke;
+    opacity: 0.9;
+}
+
+.alerta:hover{
+    opacity: 1;
+    font-weight: bold;
+    color: whitesmoke;
+}
